@@ -1,7 +1,7 @@
 const express = require('express');
 const ctrl = require("../../controllers/contactsController");
 const { validateBody } = require("../../utils");
-const {schemas} = require("../../models/contact");
+const {schemas} = require("../../utils/contactValidationSchemas");
 const router = express.Router();
 
 router.get('/', ctrl.getAllContacts )

@@ -1,22 +1,20 @@
 const {Contact} = require("../models/contact");
 const {ctrlWrapper} = require("../utils");
 const {HttpError} = require("../helpers");
-const { ObjectId } = require("mongodb");
 
 
 const getAllContacts = async (req, res) => {
         const allContacts = await Contact.find();
         res.json(allContacts);
-    
 };
 
 const getContactId = async (req, res) => {
-        const {_id} = req.params;
-        const oneContact = await Contact.findOne({contactId: ObjectId});
-        if (!oneContact) {
-            throw HttpError(404, `Book with ${_id} not found`);
+        const {contactId} = req.params;
+        const contact = await Contact.findOne({_id: contactId});
+        if (!contact) {
+            throw HttpError(404, `Book with ${contactId} not found`);
         }
-        res.status(200).json(oneContact);
+        res.status(200).json(contact);
 };
 
 const postContact= async (req, res) => {
